@@ -19,12 +19,24 @@ function adios(nombre, callback) {
     }, 1000);
 }
 
+function conversacion(nombre, veces, callback) {
+    if (veces > 0) {
+            hablar(()=>{
+                conversacion(nombre, --veces, callback)
+            })
+    }else{
+        adios(nombre,callback);
+    }
+}
+
 // -- Proceso 
 console.log("Iniciando proceso");
-hola('Cristian', function (nombre) {
-    adios()
+hola('Cristian', function(nombre){
+    conversacion(nombre,3 , function () {
+        console.log('Proceso terminado');
+        
+    })
 })
-
 
 
 // hola("Cristian", (nombre) => {
